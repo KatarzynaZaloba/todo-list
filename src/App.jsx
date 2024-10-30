@@ -1,5 +1,5 @@
 import styles from './App.module.css'
-import {Form} from "./components/Form.jsx";
+import {Form} from "./components/Form/Form.jsx";
 
 function App() {
     return (
