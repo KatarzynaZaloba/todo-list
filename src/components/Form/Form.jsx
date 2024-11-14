@@ -9,7 +9,10 @@ export function Form({onFormSubmit}) {
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                onFormSubmit(inputValue);
+                if (inputValue.trim() !== "") {
+                    onFormSubmit(inputValue);
+                    setInputValue("");
+                }
             }}
             className={styles.form} action=""
         >
@@ -21,8 +24,7 @@ export function Form({onFormSubmit}) {
                 className={styles.input}
                 type="text"
             />
-            <Button
-            >
+            <Button disabled={inputValue.trim() === ""}>
                 Dodaj
             </Button>
         </form>
