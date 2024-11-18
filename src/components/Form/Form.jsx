@@ -14,7 +14,8 @@ export function Form({onFormSubmit}) {
                     setInputValue("");
                 }
             }}
-            className={styles.form} action=""
+            className={styles.form}
+            action=""
         >
             <input
                 onChange={(event) => {
