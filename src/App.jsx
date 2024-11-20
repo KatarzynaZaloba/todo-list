@@ -36,6 +36,30 @@ function App() {
         }))
     }
 
+    function moveItemUp(id) {
+        setTodos((todos) => {
+            const index = todos.findIndex(todo => todo.id === id);
+            if (index > 0) {
+                const newTodos = [...todos];
+                [newTodos[index - 1], newTodos[index]] = [newTodos[index], newTodos[index - 1]];
+                return newTodos;
+            }
+            return todos;
+        });
+    }
+
+    function moveItemDown(id) {
+        setTodos((todos) => {
+            const index = todos.findIndex(todo => todo.id === id);
+            if (index < todos.length - 1) {
+                const newTodos = [...todos];
+                [newTodos[index + 1], newTodos[index]] = [newTodos[index], newTodos[index + 1]];
+                return newTodos;
+            }
+            return todos;
+        });
+    }
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -61,6 +85,8 @@ function App() {
                         done={done}
                         onDeleteButtonClick={() => deleteItem(id)}
                         onDoneButtonClick={() => finishItem(id)}
+                        onMoveUpButtonClick={() => moveItemUp(id)}
+                        onMoveDownButtonClick={() => moveItemDown(id)}
                     />
                 ))}
             </ul>
