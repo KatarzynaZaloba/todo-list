@@ -1,14 +1,14 @@
-import styles from './App.module.css'
-import {Form} from "./components/Form/Form.jsx";
-import {TodoItem} from "./components/TodoItem/TodoItem";
-import {getSubheading} from "./utils/getSubheading.js";
-import {useState} from "react";
+import styles from './App.module.css';
+import { Form } from "./components/Form/Form.jsx";
+import { TodoItem } from "./components/TodoItem/TodoItem";
+import { getSubheading } from "./utils/getSubheading.js";
+import { useState } from "react";
 
 function App() {
     const [isFormShown, setIsFormShown] = useState(false);
     const [todos, setTodos] = useState([
-        {name: "Zapłacić rachunki", done: false, id: 1},
-        {name: "Wyrzucić śmieci", done: true, id: 2},
+        { name: "Zapłacić rachunki", done: false, id: 1 },
+        { name: "Wyrzucić śmieci", done: true, id: 2 },
     ]);
 
     function addItem(newTodoName) {
@@ -60,6 +60,18 @@ function App() {
         });
     }
 
+    function editItem(id, newName) {
+        setTodos((prevTodos) => prevTodos.map((todo) => {
+            if (todo.id !== id) {
+                return todo;
+            }
+            return {
+                ...todo,
+                name: newName,
+            }
+        }))
+    }
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -78,7 +90,7 @@ function App() {
                 />
             )}
             <ul>
-                {todos.map(({id, name, done}) => (
+                {todos.map(({ id, name, done }) => (
                     <TodoItem
                         key={id}
                         name={name}
@@ -87,12 +99,12 @@ function App() {
                         onDoneButtonClick={() => finishItem(id)}
                         onMoveUpButtonClick={() => moveItemUp(id)}
                         onMoveDownButtonClick={() => moveItemDown(id)}
+                        onSaveEditButtonClick={(newName) => editItem(id, newName)}
                     />
                 ))}
             </ul>
         </div>
-
     );
 }
 
-export default App
+export default App;
